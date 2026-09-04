@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reflex Mini-Game</title>
+  <style>
+    body {
+      background-color: #f2f7ff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+ 
+    /* Navbar */
+    nav {
+      background-color: #e9f2ff;
+      padding: 10px 20px;
+      box-shadow: 1px 1px 5px rgb(188,188,188);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+ 
+    nav .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: rgb(89,179,209);
+      position: absolute;
+      left: 15px;
+    }
+ 
+    /* Hamburger Icon */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: rgb(33, 54, 72);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+ 
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+ 
+    ul.show {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+ 
+    nav ul li a {
+      text-decoration: none;
+      color: #233648;
+      font-size: 15px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+ 
+    nav ul li a:hover {
+      background-color: #a5c9f9;
+      color: white;
+    }
+ 
+    nav ul li a.active {
+      background-color: #3a7bd5;
+      color: white;
+      border-radius: 20px;
+      padding: 6px 12px;
+    }
+ 
+    /* Main container */
+    .container {
+      width: 80%;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+ 
+    h2 {
+      color: #1a3e75;
+      margin-bottom: 10px;
+    }
+ 
+    p.instructions {
+      color: #333;
+      font-size: 14px;
+    }
+ 
+    /* HUD */
+    .hud {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #1a3e75;
+    }
+ 
+    .hud span {
+      font-weight: bold;
+    }
+ 
+    button {
+      background-color: #3a7bd5;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+ 
+    button:hover {
+      background-color: #005bbb;
+    }
+ 
+    /* Game area */
+    #gameArea {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      border: 2px solid #1a3e75;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #f9fbff;
+    }
+ 
+    #target {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #00b33c;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: 0.1s linear;
+    }
+ 
+    .message {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a3e75;
+      margin-top: 15px;
+    }
+ 
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #4a6fa5;
+      margin-top: 25px;
+      padding: 10px;
+    }
+ 
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+ 
+      .hamburger {
+        display: flex;
+      }
+ 
+      nav ul {
+        display: none;
+        width: 100%;
+      }
+ 
+      .container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+ 
+<body>
+  <nav>
+    <div class="title">Student Portfolio</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="nav-links">
+      <li><a href="Index.html">Home</a></li>
+      <li><a href="Skills.html">Skills</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="Photo-Gallery.html">Photo Gallery</a></li>
+      <li><a href="Contact-Us.html">Contact Us</a></li>
+      <li><a href="Game.html" class="active">Play Game</a></li>
+    </ul>
+  </nav>
+ 
+  <div class="container">
+    <h2>Reflex Mini-Game</h2>
+    <p class="instructions">
+      Try to click the green target — it moves on its own!
+    </p>
+ 
+    <div class="hud">
+      ⏱ <span id="time">30</span> s |
+      ⭐ Score: <span id="score">0</span>
+      <button id="startBtn">Start</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+ 
+    <div id="gameArea">
+      <div id="target"></div>
+    </div>
+ 
+    <div class="message" id="message"></div>
+ 
+    <div class="footer">
+      © 2025 • ATS Schools • WEB Technology Course • Made with HTML, CSS, and JS
+    </div>
+  </div>
+ 
+  <script>
+    const target = document.getElementById("target");
+    const gameArea = document.getElementById("gameArea");
+    const scoreEl = document.getElementById("score");
+    const timeEl = document.getElementById("time");
+    const startBtn = document.getElementById("startBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const message = document.getElementById("message");
+    const navLinks = document.getElementById("nav-links");
+ 
+    let score = 0;
+    let timeLeft = 30;
+    let timer;
+    let moveInterval;
+    let gameRunning = false;
+ 
+    function toggleMenu() {
+      navLinks.classList.toggle("show");
+    }
+ 
+    // Move target automatically
+    function moveTarget() {
+      const maxX = gameArea.clientWidth - target.clientWidth;
+      const maxY = gameArea.clientHeight - target.clientHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      target.style.left = x + "px";
+      target.style.top = y + "px";
+    }
+ 
+    function startMovingTarget() {
+      moveInterval = setInterval(moveTarget, 700); // Move every 0.7 seconds
+    }
+ 
+    function stopMovingTarget() {
+      clearInterval(moveInterval);
+    }
+ 
+    function startTimer() {
+      timer = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          endGame();
+        }
+      }, 1000);
+    }
+ 
+    startBtn.addEventListener("click", () => {
+      if (!gameRunning) {
+        gameRunning = true;
+        score = 0;
+        timeLeft = 30;
+        scoreEl.textContent = score;
+        timeEl.textContent = timeLeft;
+        message.textContent = "";
+        startTimer();
+        startMovingTarget();
+        target.style.display = "block";
+      }
+    });
+ 
+    resetBtn.addEventListener("click", () => {
+      clearInterval(timer);
+      stopMovingTarget();
+      gameRunning = false;
+      score = 0;
+      timeLeft = 30;
+      scoreEl.textContent = score;
+      timeEl.textContent = timeLeft;
+      target.style.left = "50%";
+      target.style.top = "50%";
+      target.style.display = "block";
+      message.textContent = "";
+    });
+ 
+    target.addEventListener("click", () => {
+      if (gameRunning) {
+        score++;
+        scoreEl.textContent = score;
+      }
+    });
+ 
+    function endGame() {
+      gameRunning = false;
+      stopMovingTarget();
+      target.style.display = "none";
+      message.textContent = score >= 10 ? "🎉 You Win! Great reflexes!" : `Try again! Score ${score}`;
+    }
+  </script>
+</body>
+</html>
+ 

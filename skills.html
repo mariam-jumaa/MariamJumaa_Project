@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills</title>
+  <style>
+    body {
+      background-color: rgb(234, 234, 245);
+      font-family: Arial, sans-serif;
+    }
+ 
+    /* Navigation Bar */
+    nav {
+      padding: 10px;
+      background-color: rgb(230, 230, 250);
+      box-shadow: 1px 1px 5px rgb(188, 188, 188);
+      width: 100%;
+      display: flex;
+      justify-content: center; /* ✅ Center navbar links */
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+ 
+    nav .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: rgb(89, 179, 209);
+      position: absolute;
+      left: 15px; /* keeps title on the left */
+    }
+ 
+    /* Hamburger Icon */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: rgb(33, 54, 72);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+ 
+    ul {
+      list-style-type: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+ 
+    nav ul li a {
+      text-decoration: none;
+      color: rgb(33, 54, 72);
+      font-size: 15px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+ 
+    nav ul li a.Game {
+      background: #2fc839;
+      border-radius: 115px;
+      color: white;
+      padding: 5px 10px;
+    }
+ 
+    nav ul li a:hover {
+      background-color: rgb(161, 200, 241);
+      color: white;
+    }
+ 
+    /* Title */
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-top: 30px;
+      color: rgb(33, 54, 72);
+    }
+ 
+    /* Skills Table */
+    table {
+      background-color: rgb(243, 248, 254);
+      width: 80%;
+      text-align: center;
+      margin: 20px auto 40px auto;
+      box-shadow: 1px 1px 5px rgb(188, 188, 188);
+      border-collapse: collapse;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+ 
+    caption {
+      font-weight: bold;
+      font-size: 16px;
+      padding: 10px;
+      text-align: center;
+      color: rgb(33, 54, 72);
+    }
+ 
+    thead th {
+      background-color: rgb(230, 230, 250);
+      padding: 10px;
+      font-weight: bold;
+      color: rgb(33, 54, 72);
+    }
+ 
+    th, td {
+      border: 1px solid rgb(188, 188, 188);
+      padding: 10px;
+    }
+ 
+    tbody th[scope="row"] {
+      text-align: left;
+      font-weight: bold;
+      padding-left: 15px;
+    }
+ 
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 15px;
+      color: rgb(91, 109, 164);
+      background-color: rgb(234, 234, 245);
+      font-size: 14px;
+    }
+ 
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+ 
+      .hamburger {
+        display: flex;
+      }
+ 
+      ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        display: none; /* hidden by default */
+        width: 100%;
+      }
+ 
+      ul.show {
+        display: flex;
+      }
+ 
+      table {
+        width: 95%;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+ 
+      th, td {
+        font-size: 13px;
+        padding: 8px;
+      }
+ 
+      h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="title">Student Portfolio</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Skills.html">Skills</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="Photo-Gallery.html">Photo Gallery</a></li>
+      <li><a href="Contact-Us.html">Contact Us</a></li>
+      <li><a href="Game.html" class="Game">Play Game</a></li>
+    </ul>
+  </nav>
+ 
+  <h2>My Skills</h2>
+ 
+  <table>
+    <caption>Technical Skills (1–5)</caption>
+    <thead>
+      <tr>
+        <th scope="col">Skill</th>
+        <th scope="col">Level</th>
+        <th scope="col">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">HTML</th><td>4</td><td>Semantic tags, tables, forms</td></tr>
+      <tr><th scope="row">CSS</th><td>3</td><td>Flexbox, Grid, Media queries</td></tr>
+      <tr><th scope="row">JavaScript</th><td>3</td><td>DOM, events, small game logic</td></tr>
+      <tr><th scope="row">Problem Solving</th><td>4</td><td>Algorithms, Debugging</td></tr>
+      <tr><th scope="row">Git & GitHub</th><td>2</td><td>Basic commits and pushes</td></tr>
+      <tr><th scope="row">UI Design</th><td>2</td><td>Color, spacing, simple wireframes</td></tr>
+      <tr><th scope="row">Presentation</th><td>4</td><td>Explaining projects clearly</td></tr>
+      <tr><th scope="row">Teamwork</th><td>4</td><td>Collaborating in group projects</td></tr>
+      <tr><th scope="row">Time Management</th><td>3</td><td>Balancing study and coding practice</td></tr>
+      <tr><th scope="row">Presentation Skills</th><td>4</td><td>Confident in speaking and slides</td></tr>
+    </tbody>
+  </table>
+ 
+  <div class="footer">
+    <p>2025 • ATS Schools • WEB Technology Course • Made with HTML, CSS, and JS</p>
+  </div>
+ 
+  <script>
+    function toggleMenu() {
+      document.getElementById('nav-links').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
+ 
